@@ -1,26 +1,18 @@
 version: 1
 applications:
-  - appRoot: my-portfolio  # Specify the root folder where the code is located
-    backend:
-      phases:
-        preBuild:
-          commands:
-            - npm install  # Install any backend dependencies (if applicable)
-        build:
-          commands:
-            - echo 'No build step required'  # Skip build step if not needed
+  - appRoot: my-portfolio  # Specify the root folder where the code is located (if it’s a subfolder)
     frontend:
       phases:
         preBuild:
           commands:
-            - npm install  # Install frontend dependencies (if applicable)
+            - npm install  # Install frontend dependencies
         build:
           commands:
-            - echo 'No build step required'  # Skip build step if not needed
-    artifacts:
-      baseDirectory: /  # Use the root directory for deployment (no build folder)
-      files:
-        - '**/*'  # Include all files for deployment
-    cache:
-      paths:
-        - node_modules/**/*  # Optionally cache node_modules if needed
+            - npm run build  # Or your custom build command if applicable
+      artifacts:
+        baseDirectory: build  # This is the directory where your build output is located (use dist if it's your folder)
+        files:
+          - '**/*'  # Include all files in the build directory for deployment
+      cache:
+        paths:
+          - node_modules/**/*  # Optionally cache node_modules if needed
