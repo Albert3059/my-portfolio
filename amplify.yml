@@ -1,18 +1,18 @@
 version: 1
 applications:
-  - appRoot: my-portfolio  # Specify the root folder where the code is located (if it’s a subfolder)
+  - appRoot: .  # This is the root directory since you are not using a subfolder
     frontend:
       phases:
         preBuild:
           commands:
-            - npm install  # Install frontend dependencies
+            - npm install  # Install backend dependencies
         build:
           commands:
-            - npm run build  # Or your custom build command if applicable
+            - echo "No build step for this Express app"  # No build step needed
       artifacts:
-        baseDirectory: build  # This is the directory where your build output is located (use dist if it's your folder)
+        baseDirectory: public  # Point to the 'public' folder where your static files are located
         files:
-          - '**/*'  # Include all files in the build directory for deployment
+          - '**/*'  # Include all files in the public folder for deployment
       cache:
         paths:
           - node_modules/**/*  # Optionally cache node_modules if needed
