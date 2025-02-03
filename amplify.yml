@@ -1,15 +1,23 @@
 version: 1
 applications:
-  - appRoot: my-portfolio
+  - appRoot: my-portfolio  # Specify the root folder where the code is located
+    backend:
+      phases:
+        preBuild:
+          commands:
+            - npm install  # Install any backend dependencies (if applicable)
+        build:
+          commands:
+            - echo 'No build step required'  # No build command for a Node.js Express app
     frontend:
       phases:
         preBuild:
           commands:
-            - npm install
+            - npm install  # Install dependencies for frontend (if you have one)
         build:
           commands:
-            - npm run build
-      artifacts:
-        baseDirectory: .  # Pointing to the root where your static files are
-        files:
-          - '**/*'
+            - echo 'No build step required'  # Skip build step
+    artifacts:
+      baseDirectory: /  # Use the root directory since no build step is required
+      files:
+        - '**/*'  # Include all files to be served (static files, etc.)
